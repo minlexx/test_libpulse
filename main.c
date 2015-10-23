@@ -174,14 +174,14 @@ int main(int argc, char** argv) {
     fwrite("WAVE", 1, 4, fwave);
     // write fmt  subchunk
     fwrite("fmt ", 1, 4, fwave);
-    write_little_endian(16, 4, fwave);   // SubChunk1Size is 16
-    write_little_endian(1, 2, fwave);    // PCM is format 1
-    write_little_endian(2, 2, fwave); // num channels
-    write_little_endian(44100, 4, fwave); // sample rate
+    write_little_endian(16, 4, fwave);   // "fmt " SubChunk1Size is 16
+    write_little_endian(1, 2, fwave);    // PCM is format 1 (WAVE_FORMAT_PCM)
+    write_little_endian(sspec.channels, 2, fwave); // num channels
+    write_little_endian(sspec.rate, 4, fwave); // sample rate
     // byte_rate = sample_rate*num_channels*bytes_per_sample;
     // write_little_endian(byte_rate, 4, fwave); // byte rate
     write_little_endian(PCM_BYTE_RATE, 4, fwave); // byte rate
-    write_little_endian(2*2, 2, fwave);  // block align (channels*bytes_per_sample))
+    write_little_endian(sspec.channels*2, 2, fwave);  // block align (channels*bytes_per_sample))
     write_little_endian(16, 2, fwave);  // bits per sample, PCM signed 16 LE
     // write data subchunk
     fwrite("data", 1, 4, fwave);

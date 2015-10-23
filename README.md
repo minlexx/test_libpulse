@@ -15,3 +15,5 @@ described in "Latency Control" document:
 http://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/Developer/Clients/LatencyControl/
 
 Compile with `pkg-config --cflags --libs libpulse-simple ogg vorbis vorbisenc`
+
+You can use mixer app (like pavucontrol) to tweak recording source and/or recording volume level.
